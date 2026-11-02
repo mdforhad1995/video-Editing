@@ -1,0 +1,35 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 64;
+    }
+
+    function isValidBooking(data) {
+      return data.keys().hasAll(['ticketId', 'type', 'fullName', 'email', 'channelOrBrand', 'createdAt'])
+        && data.ticketId is string && data.ticketId.size() <= 32
+        && data.type in ['book_package', 'test_edit']
+        && data.fullName is string && data.fullName.size() > 0 && data.fullName.size() <= 100
+        && data.email is string && data.email.size() > 3 && data.email.size() <= 120
+        && data.channelOrBrand is string && data.channelOrBrand.size() <= 100;
+    }
+
+    match /bookings/{bookingId} {
+      allow create: if isValidId(bookingId) && isValidBooking(request.resource.data);
+      allow read, update, delete: if true;
+    }
+
+    match /site_config/{configId} {
+      allow read, write: if true;
+    }
+
+    match /portfolio/{itemId} {
+      allow read, write: if true;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "entities": {
+    "Booking": {
+      "title": "Booking",
+      "description": "Customer video post-production booking or free test edit request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "ticketId": { "type": "string" },
+        "type": { "type": "string", "enum": ["book_package", "test_edit"] },
+        "fullName": { "type": "string" },
+        "email": { "type": "string" },
+        "phoneOrWhatsApp": { "type": "string" },
+        "channelOrBrand": { "type": "string" },
+        "serviceTier": { "type": "string" },
+        "videoType": { "type": "string" },
+        "footageLink": { "type": "string" },
+        "projectNotes": { "type": "string" },
+        "requestFreeTestEdit": { "type": "boolean" },
+        "status": { "type": "string", "enum": ["received", "in_review", "editing", "delivered"] },
+        "createdAt": { "type": "string" },
+        "userNotificationSent": { "type": "boolean" },
+        "adminNotificationSent": { "type": "boolean" },
+        "adminEmail": { "type": "string" }
+      },
+      "required": ["ticketId", "type", "fullName", "email", "channelOrBrand", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/bookings/{bookingId}": {
+      "schema": "Booking",
+      "description": "Collection of video editing package orders and free test edit bookings"
+    }
+  }
+}

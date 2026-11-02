@@ -1,0 +1,8 @@
+{
+  "name": "Clippasia Video Editing Services",
+  "description": "High-retention video editing services for eCommerce brands, creators, and agencies. Turn raw footage into viral, high-converting video assets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
